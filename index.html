@@ -1994,16 +1994,6 @@
             >
               Proceed to Registration →
             </button>
-            <p
-              style="
-                font-size: 0.8rem;
-                color: var(--text-light);
-                margin-top: 8px;
-              "
-            >
-              You will be redirected in
-              <span id="redirectCountdown">5</span> seconds…
-            </p>
           </div>
         </div>
       </div>
@@ -2265,33 +2255,21 @@
         });
 
         function showSuccessMessage() {
-          formWrapper.classList.add("hidden");
-          formSuccess.classList.add("visible");
-          document
-            .getElementById("formContainer")
-            .scrollIntoView({ behavior: "smooth", block: "center" });
+          formWrapper.classList.add('hidden');
+          formSuccess.classList.add('visible');
+          document.getElementById('formContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
           applicationForm.reset();
           clearAllErrors();
 
-          // Auto-redirect countdown
-          let seconds = 5;
-          const countdownEl = document.getElementById("redirectCountdown");
-          const btn = document.getElementById("redirectRegisterBtn");
-
-          // Manual redirect on button click
-          btn.addEventListener("click", function () {
-            window.open(REGISTRATION_URL, "_blank");
+          const countdownEl = document.getElementById('redirectCountdown');
+          if (countdownEl) {
+              countdownEl.parentElement.style.display = 'none'; // hide the countdown text
+          }
+  
+          const btn = document.getElementById('redirectRegisterBtn');
+          btn.addEventListener('click', function() {
+          window.open(REGISTRATION_URL, '_blank');
           });
-
-          // Auto-redirect timer
-          const timer = setInterval(() => {
-            seconds--;
-            if (countdownEl) countdownEl.textContent = seconds;
-            if (seconds <= 0) {
-              clearInterval(timer);
-              window.open(REGISTRATION_URL, "_blank");
-            }
-          }, 1000);
         }
         // console.log(
         //   "%c🚀 Exam Lab Recruitment Portal Ready %c| %cImmersive hero with computer lab visuals",
